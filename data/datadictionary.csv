@@ -1,0 +1,76 @@
+Column,file,Description
+TeamID,teams.csv,"a 4 digit id number, from 1000-1999, uniquely identifying each NCAA men's team. A school's TeamID does not change from one year to the next, so for instance the Duke men's TeamID is 1181 for all seasons. To avoid possible confusion between the men's data and the women's data, all of the men's team ID's range from 1000-1999, whereas all of the women's team ID's range from 3000-3999."
+TeamName,teams.csv,"a compact spelling of the team's college name, 16 characters or fewer. There are no commas or double-quotes in the team names, but you will see some characters that are not letters or spaces, e.g., Texas A&M, St Mary's CA, TAM C. Christi, and Bethune-Cookman."
+FirstD1Season,teams.csv,"the first season in our dataset that the school was a Division-I school. For instance, FL Gulf Coast (famously) was not a Division-I school until the 2008 season, despite their two wins just five years later in the 2013 NCAA tourney. Of course, many schools were Division-I far earlier than 1985, but since we don't have any data included prior to 1985, all such teams are listed with a FirstD1Season of 1985."
+LastD1Season,teams.csv,"the last season in our dataset that the school was a Division-I school. For any teams that are currently Division-I, they will be listed with LastD1Season=2019, and you can confirm there are 353 such teams. It has been a few years since any teams stopped being Division-I; the last was Centenary whose final Division-I year was 2011."
+Season,ncaatourneyseeds.csv,the year that the tournament was played in
+Seed,ncaatourneyseeds.csv,"this is a 3/4-character identifier of the seed, where the first character is either W, X, Y, or Z (identifying the region the team was in) and the next two digits (either 01, 02, ..., 15, or 16) tell you the seed within the region. For play-in teams, there is a fourth character (a or b) to further distinguish the seeds, since teams that face each other in the play-in games will have seeds with the same first three characters. The ""a"" and ""b"" are assigned based on which Team ID is lower numerically. As an example of the format of the seed, the first record in the file is seed W01 from 1985, which means we are looking at the #1 seed in the W region (which we can see from the ""Seasons.csv"" file was the East region)."
+TeamID,ncaatourneyseeds.csv,"this identifies the id number of the team, as specified in the Teams.csv file"
+Season,regularseasoncompactresults.csv,"this is the year of the associated entry in Seasons.csv (the year in which the final tournament occurs). For example, during the 2016 season, there were regular season games played between November 2015 and March 2016, and all of those games will show up with a Season of 2016."
+DayNum,regularseasoncompactresults.csv,"this integer always ranges from 0 to 132, and tells you what day the game was played on. It represents an offset from the ""DayZero"" date in the ""Seasons.csv"" file. For example, the first game in the file was DayNum=20. Combined with the fact from the ""Seasons.csv"" file that day zero was 10/29/1984 that year, this means the first game was played 20 days later, or 11/18/1984. There are no teams that ever played more than one game on a given date, so you can use this fact if you need a unique key (combining Season and DayNum and WTeamID). In order to accomplish this uniqueness, we had to adjust one game's date. In March 2008, the SEC postseason tournament had to reschedule one game (Georgia-Kentucky) to a subsequent day because of a tornado, so Georgia had to actually play two games on the same day. In order to enforce this uniqueness, we moved the game date for the Georgia-Kentucky game back to its original scheduled date."
+WTeamID,regularseasoncompactresults.csv,"this identifies the id number of the team that won the game, as listed in the ""Teams.csv"" file. No matter whether the game was won by the home team or visiting team, or if it was a neutral-site game, the ""WTeamID"" always identifies the winning team."
+WScore,regularseasoncompactresults.csv,this identifies the number of points scored by the winning team.
+LTeamID,regularseasoncompactresults.csv,this identifies the id number of the team that lost the game.
+LScore,regularseasoncompactresults.csv,this identifies the number of points scored by the losing team. Thus you can be confident that WScore will be greater than LScore for all games listed.
+WLoc,regularseasoncompactresults.csv,"this identifies the ""location"" of the winning team. If the winning team was the home team, this value will be ""H"". If the winning team was the visiting team, this value will be ""A"". If it was played on a neutral court, then this value will be ""N"". Sometimes it is unclear whether the site should be considered neutral, since it is near one team's home court, or even on their court during a tournament, but for this determination we have simply used the Kenneth Massey data in its current state, where the ""@"" sign is either listed with the winning team, the losing team, or neither team. If you would like to investigate this factor more closely, we invite you to explore Data Section 3, which provides the city that each game was played in, irrespective of whether it was considered to be a neutral site."
+NumOT,regularseasoncompactresults.csv,"this indicates the number of overtime periods in the game, an integer 0 or higher."
+Season,ncaatourneycompactresults.csv,"this is the year of the associated entry in Seasons.csv (the year in which the final tournament occurs). For example, during the 2016 season, there were regular season games played between November 2015 and March 2016, and all of those games will show up with a Season of 2016."
+DayNum,ncaatourneycompactresults.csv,"this integer always ranges from 0 to 132, and tells you what day the game was played on. It represents an offset from the ""DayZero"" date in the ""Seasons.csv"" file. For example, the first game in the file was DayNum=20. Combined with the fact from the ""Seasons.csv"" file that day zero was 10/29/1984 that year, this means the first game was played 20 days later, or 11/18/1984. There are no teams that ever played more than one game on a given date, so you can use this fact if you need a unique key (combining Season and DayNum and WTeamID). In order to accomplish this uniqueness, we had to adjust one game's date. In March 2008, the SEC postseason tournament had to reschedule one game (Georgia-Kentucky) to a subsequent day because of a tornado, so Georgia had to actually play two games on the same day. In order to enforce this uniqueness, we moved the game date for the Georgia-Kentucky game back to its original scheduled date."
+WTeamID,ncaatourneycompactresults.csv,"this identifies the id number of the team that won the game, as listed in the ""Teams.csv"" file. No matter whether the game was won by the home team or visiting team, or if it was a neutral-site game, the ""WTeamID"" always identifies the winning team."
+WScore,ncaatourneycompactresults.csv,this identifies the number of points scored by the winning team.
+LTeamID,ncaatourneycompactresults.csv,this identifies the id number of the team that lost the game.
+LScore,ncaatourneycompactresults.csv,this identifies the number of points scored by the losing team. Thus you can be confident that WScore will be greater than LScore for all games listed.
+WLoc,ncaatourneycompactresults.csv,"this identifies the ""location"" of the winning team. If the winning team was the home team, this value will be ""H"". If the winning team was the visiting team, this value will be ""A"". If it was played on a neutral court, then this value will be ""N"". Sometimes it is unclear whether the site should be considered neutral, since it is near one team's home court, or even on their court during a tournament, but for this determination we have simply used the Kenneth Massey data in its current state, where the ""@"" sign is either listed with the winning team, the losing team, or neither team. If you would like to investigate this factor more closely, we invite you to explore Data Section 3, which provides the city that each game was played in, irrespective of whether it was considered to be a neutral site."
+NumOT,ncaatourneycompactresults.csv,"this indicates the number of overtime periods in the game, an integer 0 or higher."
+WFGM,regularseasondetailedresults.csv,field goals made (by the winning team)
+WFGA,regularseasondetailedresults.csv,field goals attempted (by the winning team)
+WFGM3,regularseasondetailedresults.csv,three pointers made (by the winning team)
+WFGA3,regularseasondetailedresults.csv,three pointers attempted (by the winning team)
+WFTM,regularseasondetailedresults.csv,free throws made (by the winning team)
+WFTA,regularseasondetailedresults.csv,free throws attempted (by the winning team)
+WOR,regularseasondetailedresults.csv,offensive rebounds (pulled by the winning team)
+WDR,regularseasondetailedresults.csv,defensive rebounds (pulled by the winning team)
+WAst,regularseasondetailedresults.csv,assists (by the winning team)
+WTO,regularseasondetailedresults.csv,turnovers committed (by the winning team)
+WStl,regularseasondetailedresults.csv,steals (accomplished by the winning team)
+WBlk,regularseasondetailedresults.csv,blocks (accomplished by the winning team)
+WPF,regularseasondetailedresults.csv,personal fouls committed (by the winning team)
+LFGM,regularseasondetailedresults.csv,field goals made (by the losing team)
+LFGA,regularseasondetailedresults.csv,field goals attempted (by the losing team)
+LFGM3,regularseasondetailedresults.csv,three pointers made (by the losing team)
+LFGA3,regularseasondetailedresults.csv,three pointers attempted (by the losing team)
+LFTM,regularseasondetailedresults.csv,free throws made (by the losing team)
+LFTA,regularseasondetailedresults.csv,free throws attempted (by the losing team)
+LOR,regularseasondetailedresults.csv,offensive rebounds (pulled by the losing team)
+LDR,regularseasondetailedresults.csv,defensive rebounds (pulled by the losing team)
+Last,regularseasondetailedresults.csv,assists (by the losing team)
+LTO,regularseasondetailedresults.csv,turnovers committed (by the losing team)
+LStl,regularseasondetailedresults.csv,steals (accomplished by the losing team)
+LBlk,regularseasondetailedresults.csv,blocks (accomplished by the losing team)
+LPF,regularseasondetailedresults.csv,personal fouls committed (by the losing team)
+WFGM,ncaatourneydetailedresults.csv,field goals made (by the winning team)
+WFGA,ncaatourneydetailedresults.csv,field goals attempted (by the winning team)
+WFGM3,ncaatourneydetailedresults.csv,three pointers made (by the winning team)
+WFGA3,ncaatourneydetailedresults.csv,three pointers attempted (by the winning team)
+WFTM,ncaatourneydetailedresults.csv,free throws made (by the winning team)
+WFTA,ncaatourneydetailedresults.csv,free throws attempted (by the winning team)
+WOR,ncaatourneydetailedresults.csv,offensive rebounds (pulled by the winning team)
+WDR,ncaatourneydetailedresults.csv,defensive rebounds (pulled by the winning team)
+WAst,ncaatourneydetailedresults.csv,assists (by the winning team)
+WTO,ncaatourneydetailedresults.csv,turnovers committed (by the winning team)
+WStl,ncaatourneydetailedresults.csv,steals (accomplished by the winning team)
+WBlk,ncaatourneydetailedresults.csv,blocks (accomplished by the winning team)
+WPF,ncaatourneydetailedresults.csv,personal fouls committed (by the winning team)
+LFGM,ncaatourneydetailedresults.csv,field goals made (by the losing team)
+LFGA,ncaatourneydetailedresults.csv,field goals attempted (by the losing team)
+LFGM3,ncaatourneydetailedresults.csv,three pointers made (by the losing team)
+LFGA3,ncaatourneydetailedresults.csv,three pointers attempted (by the losing team)
+LFTM,ncaatourneydetailedresults.csv,free throws made (by the losing team)
+LFTA,ncaatourneydetailedresults.csv,free throws attempted (by the losing team)
+LOR,ncaatourneydetailedresults.csv,offensive rebounds (pulled by the losing team)
+LDR,ncaatourneydetailedresults.csv,defensive rebounds (pulled by the losing team)
+Last,ncaatourneydetailedresults.csv,assists (by the losing team)
+LTO,ncaatourneydetailedresults.csv,turnovers committed (by the losing team)
+LStl,ncaatourneydetailedresults.csv,steals (accomplished by the losing team)
+LBlk,ncaatourneydetailedresults.csv,blocks (accomplished by the losing team)
+LPF,ncaatourneydetailedresults.csv,personal fouls committed (by the losing team)
